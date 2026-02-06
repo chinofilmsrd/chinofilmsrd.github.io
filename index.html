@@ -1,246 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Eliezer Rufino</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-:root {
-  --bg: #000000;
-  --bg-soft: #0f0f10;
-  --card: rgba(255,255,255,0.06);
-  --text: #f5f5f7;
-  --muted: #a1a1a6;
-  --accent: #2997ff;
-  --border: rgba(255,255,255,0.12);
-}
+  <title>Eliezer.pro</title>
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Helvetica, Arial, sans-serif;
-}
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3501/3501920.png" type="image/png">
 
-body {
-  background: radial-gradient(circle at top, #1a1a1c, #000);
-  color: var(--text);
-  overflow-x: hidden;
-}
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ---------- HERO ---------- */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px 20px;
-  position: relative;
-}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(41,151,255,0.25), transparent 70%);
-  filter: blur(120px);
-  top: -200px;
-}
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
 
-.hero h1 {
-  font-size: clamp(3rem, 6vw, 4.8rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 20px;
-}
+    /* VIDEO FONDO */
+    .hero video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
 
-.hero p {
-  font-size: 1.2rem;
-  color: var(--muted);
-  max-width: 620px;
-  margin: 0 auto 40px;
-}
+    /* OVERLAY */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08), rgba(0,0,0,0.9));
+      animation: pulse 8s infinite alternate;
+    }
 
-.hero a {
-  color: var(--accent);
-  font-size: 1.1rem;
-  text-decoration: none;
-}
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
 
-.hero a:hover {
-  text-decoration: underline;
-}
+    /* CONTENIDO */
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+      animation: fadeUp 1.4s ease-out;
+    }
 
-/* ---------- SECTIONS ---------- */
-section {
-  padding: 120px 20px;
-  max-width: 1200px;
-  margin: auto;
-  text-align: center;
-}
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-section h2 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 25px;
-}
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
 
-section p {
-  font-size: 1.1rem;
-  color: var(--muted);
-  max-width: 700px;
-  margin: auto;
-}
+    p {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      margin-bottom: 40px;
+    }
 
-/* ---------- GLASS CARDS ---------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 40px;
-  margin-top: 70px;
-}
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.card {
-  padding: 45px 35px;
-  border-radius: 22px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(20px);
-  transform: translateY(30px);
-  opacity: 0;
-  transition: all 0.8s ease;
-}
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(255,255,255,0.25);
+    }
 
-.card.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
+    /* EFECTO SUTIL SCROLL */
+    .glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+      filter: blur(80px);
+      animation: float 10s infinite alternate ease-in-out;
+    }
 
-.card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-}
+    @keyframes float {
+      from {
+        transform: translate(-100px, -50px);
+      }
+      to {
+        transform: translate(100px, 50px);
+      }
+    }
 
-.card p {
-  font-size: 1rem;
-  color: var(--muted);
-}
-
-/* ---------- PARALLAX STRIP ---------- */
-.strip {
-  height: 280px;
-  background: linear-gradient(
-    120deg,
-    rgba(41,151,255,0.25),
-    rgba(255,255,255,0.02)
-  );
-  border-radius: 40px;
-  margin: 120px auto;
-  max-width: 1100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  padding: 80px 20px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* ---------- FADE IN ---------- */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
-}
-
-.fade.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero fade">
-  <div>
-    <h1>Eliezer Rufino</h1>
-    <p>
-      Tecnología, creatividad y visión.
-      Soluciones digitales con estética, orden y propósito.
-    </p>
-    <a href="#vision">Explorar ›</a>
-  </div>
-</div>
+  <section class="hero">
+    <!-- VIDEO HERO (puedes cambiarlo luego) -->
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-night-city-lights-9179/1080p.mp4" type="video/mp4">
+    </video>
 
-<!-- VISIÓN -->
-<section id="vision" class="fade">
-  <h2>Minimalismo que impacta</h2>
-  <p>
-    Inspirado en el diseño de Apple:
-    claridad, enfoque y experiencia por encima del ruido.
-  </p>
-</section>
+    <div class="overlay"></div>
+    <div class="glow"></div>
 
-<!-- STRIP -->
-<div class="strip fade">
-  Diseñado para durar
-</div>
-
-<!-- GRID -->
-<section>
-  <h2 class="fade">Áreas de enfoque</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>🎬 Producción Visual</h3>
-      <p>Video, fotografía y narrativa cinematográfica.</p>
+    <div class="content">
+      <h1>Eliezer.pro</h1>
+      <p>Creatividad, tecnología y visión.  
+         Una presencia digital simple, elegante y moderna.</p>
+      <a href="#" class="btn">Próximamente</a>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>⚙️ Infraestructura & IA</h3>
-      <p>Servidores, automatización y sistemas inteligentes.</p>
-    </div>
-
-    <div class="card">
-      <h3>🌐 Proyectos con Propósito</h3>
-      <p>Creatividad alineada a valores y visión.</p>
-    </div>
-  </div>
-</section>
-
-<footer class="fade">
-  © 2026 · eliezer.pro
-</footer>
-
-<script>
-/* ---------- SCROLL ANIMATIONS ---------- */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll(".fade, .card").forEach(el => {
-  observer.observe(el);
-});
-</script>
+  <footer>
+    © 2026 Eliezer.pro
+  </footer>
 
 </body>
 </html>
